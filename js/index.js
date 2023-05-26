@@ -6,6 +6,12 @@ let tableBody = document.querySelector('table tbody')
 let inputTitle = document.getElementById('title')
 const months = ['Yanvar','Fevral','Mart','Aprel','May','Iyun','Iyul','Avgust','Sentyabr','Oktyabr','Noyabr','Dekabr']
 
+// axios.get(`${url}/${dep}`)
+// .then(res => {
+//     if(res.status == 200){
+//         console.log(res.data)
+//     }
+// })
 
 const addZero = val => val < 10 ? `0${val}` : val
 
@@ -39,41 +45,31 @@ const render = (list) => {
 }
 
 const getDepartments = async () => {
-    let res = await fetch(`${url}/${dep}`)
-    departments = await res.json()
+    let res = await axios.get(`${url}/${dep}`)
+    if(res.status == 200){
+        departments = res.data
+    }
     render(departments)
 }
 
 const addDepart = async () => {
-    let department = {
+    let res = await axios.post(`${url}/${dep}`,{
         title: inputTitle.value
-    }
-    let res = await fetch(`${url}/${dep}`, {
-        method: "POST",
-        body: JSON.stringify(department),
-        headers: {
-            'Content-Type': 'application/json'
-        }
     })
-    res = await res.json()
-    // departments.unshift(res)
+    if(res.status == 200){
+       departments = [res.data,...departments]
+       render(departments)
+    }
     inputTitle.value = ''
-
-    departments = [res, ...departments]
-    render(departments)
 }
 
 const deleteDep = _id => {
     if (confirm('Ishonchingiz komilmi?')){
-      fetch(`${url}/${dep}/${_id}`, {
-        method: 'delete',
-        headers: {
-            'Content-type': 'application/json'
-        }
-      }).finally(() => {
+        axios.delete(`${url}/${dep}/${_id}`)
+    .then(() => {
         departments = departments.filter(dep => dep._id !== _id)
         render(departments)
-      })
+    })
     }
 }
 
