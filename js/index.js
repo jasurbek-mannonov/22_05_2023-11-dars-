@@ -6,12 +6,10 @@ let tableBody = document.querySelector('table tbody')
 let inputTitle = document.getElementById('title')
 const months = ['Yanvar','Fevral','Mart','Aprel','May','Iyun','Iyul','Avgust','Sentyabr','Oktyabr','Noyabr','Dekabr']
 
-// axios.get(`${url}/${dep}`)
-// .then(res => {
-//     if(res.status == 200){
-//         console.log(res.data)
-//     }
-// })
+const addModal = new bootstrap.Modal('#addDep', {
+    keyboard: false
+})
+const modalToggle = document.getElementById('addDep')
 
 const addZero = val => val < 10 ? `0${val}` : val
 
@@ -56,11 +54,13 @@ const addDepart = async () => {
     let res = await axios.post(`${url}/${dep}`,{
         title: inputTitle.value
     })
-    if(res.status == 200){
+    if(res.status == 201){
        departments = [res.data,...departments]
        render(departments)
     }
     inputTitle.value = ''
+
+    addModal.hide(modalToggle)
 }
 
 const deleteDep = _id => {
@@ -70,6 +70,13 @@ const deleteDep = _id => {
         departments = departments.filter(dep => dep._id !== _id)
         render(departments)
     })
+
+    }
+}
+
+const handlePress = (e) => {
+    if(e.keyCode == 13){
+        addDepart()
     }
 }
 

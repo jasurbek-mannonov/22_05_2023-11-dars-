@@ -41,25 +41,16 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="title"  class="form-label">Bo'lim nomi</label>
-                        <input type="text" class="form-control" id="title">
+                        <label for="title" class="form-label">Bo'lim nomi</label>
+                        <input type="text" class="form-control" id="title" onkeypress="handlePress(event)">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button 
-                    type="button" 
-                    class="btn btn-secondary" 
-                    data-bs-dismiss="modal"
-                    >
-                    Bekor qilish</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Bekor qilish</button>
 
-                    <button 
-                    type="button" 
-                    class="btn btn-primary"
-                    onclick="addDepart()"
-                    data-bs-dismiss="modal"
-                    >
-                    Saqlash</button>
+                    <button type="button" class="btn btn-primary" onclick="addDepart()" data-bs-dismiss="modal">
+                        Saqlash</button>
                 </div>
             </div>
         </div>
