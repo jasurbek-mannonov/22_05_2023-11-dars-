@@ -56,6 +56,35 @@
         </div>
     </div>
 
+    <!-- Bo'limni tahrirlash -->
+    <div class="modal fade" id="editDep" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Bo'limni tahrirlash</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Bo'lim nomi</label>
+                        <input type="text" class="form-control" id="uptitle" onkeypress="handlePress(event,1)">
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="upstatus" value="1">
+                        <label class="form-check-label" for="upstatus">Faol</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Bekor qilish</button>
+
+                    <button type="button" class="btn btn-primary" onclick="saveDepart()" data-bs-dismiss="modal">
+                        Saqlash</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/index.js"></script>
