@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11-dars</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+
+<body>
+    <div class="container-workers m-3">
+        <div class="d-flex justify-content-between mt-3 mb-3">
+            <h2>Xodimlar ro'yxati</h2>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addDep">Yangi xodim</button>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>T/R</th>
+                    <th>Ismi</th>
+                    <th>Familiyasi</th>
+                    <th>Email</th>
+                    <th>Manzil</th>
+                    <th>Yosh</th>
+                    <th>Ro'yxatga olingan vaqti</th>
+                    <th>Yangilangan vaqti</th>
+                    <th>Telefon</th>
+                    <th>Bo'lim</th>
+                    <th>Holati</th>
+                    <th>Maoshi</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal fade" id="addDep" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Yangi xodim</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Ismi</label>
+                        <input type="text" class="form-control" id="name" name="name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="lname" class="form-label">Familiya</label>
+                        <input type="text" class="form-control" id="lname" name="lname">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="text" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Manzil</label>
+                        <input type="text" class="form-control" id="address" name="address">
+                    </div>
+                    <div class="mb-3">
+                        <label for="age" class="form-label">Yosh</label>
+                        <input type="number" class="form-control" id="age" name="age">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Telefon</label>
+                        <input type="number" class="form-control" id="phone" name="phone">
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-select" name="department">
+                            <option selected>Open this select menu</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="salary" class="form-label">Maoshi</label>
+                        <input type="number" class="form-control" id="salary" name="salary">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Bekor qilish</button>
+
+                    <button type="button" class="btn btn-primary" onclick="addWorkers()" data-bs-dismiss="modal">
+                        Saqlash</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bo'limni tahrirlash -->
+    <div class="modal fade" id="editDep" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Xodimni tahrirlash</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Xodimning ismi</label>
+                        <input type="text" class="form-control" id="uptitle" onkeypress="handlePress(event,1)">
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="upstatus" value="1">
+                        <label class="form-check-label" for="upstatus">Faol</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Bekor qilish</button>
+
+                    <button type="button" class="btn btn-primary" onclick="saveDepart()" data-bs-dismiss="modal">
+                        Saqlash</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/workers.js"></script>
+</body>
+
+</html>
