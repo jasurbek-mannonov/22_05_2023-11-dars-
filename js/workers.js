@@ -1,7 +1,7 @@
 const url = 'http://95.130.227.52:3010'
 const table = 'worker'
 
-let inputs = document.querySelectorAll('.addDep [name]')
+let inputs = document.querySelectorAll('#addDep [name]')
 let tableWorkers = document.querySelector('.table tbody')
 
 let workers = []
@@ -30,7 +30,6 @@ const render = (list) => {
             <td>${item.address}</td>
             <td>${item.age}</td>
             <td>${parseDate(item.createdTime)}</td>
-            <td>${parseDate(item.updateTime)}</td>
             <td>${item.phone}</td>
             <td>${item.department}</td>
             <td>${item.status == 1 ? 'Faol' : 'Nofaol'}</td>
@@ -59,29 +58,27 @@ const getWorkers = async () => {
     let res = await axios.get(`${url}/${table}`)
     if(res.status == 200){
         workers = res.data
-        // console.log(workers)
+        console.log(workers)
     }
     render(workers)
 }
 
 // Qo'shish
-const addWorkers = async () => {
-    inputs.forEach((el) => {
+const addWorkers = () => {
+    inputs.forEach(async (el) => {
       worker[el.getAttribute('name')] = el.value;
-    });
-  
-    try {
-      const res = await axios.post(`${url}/${table}`, worker);
-  
-      if (res.status === 200) {
+      try {
+        let res = await axios.post(`${url}/${table}`, worker);
+        if (res.status === 201) {
           workers = [res.data, ...workers];
           render(workers);
-          console.log(res.data)
         }
-    } catch (error) {
+      } catch (error) {
         console.error('Error:', error);
-    }
-}
+      }
+    });
+  };
+  
 
   // O'chirish
 const deleteWorker = _id => {
