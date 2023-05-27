@@ -5,16 +5,16 @@ let inputs = document.querySelectorAll('#addDep [name]')
 let tableWorkers = document.querySelector('.table tbody')
 
 let workers = []
-let worker ={}
+let worker = {}
 
-const months = ['Yanvar','Fevral','Mart','Aprel','May','Iyun','Iyul','Avgust','Sentyabr','Oktyabr','Noyabr','Dekabr']
+const months = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'Avgust', 'Sentyabr', 'Oktyabr', 'Noyabr', 'Dekabr']
 
 const addZero = val => val < 10 ? `0${val}` : val
 
 const parseDate = (date) => {
     let d = new Date(date)
 
-    return`${addZero(d.getHours())}:${addZero(d.getMinutes())} ${addZero(d.getDate())}-${months[d.getMonth()]} ${d.getFullYear()} y.`
+    return `${addZero(d.getHours())}:${addZero(d.getMinutes())} ${addZero(d.getDate())}-${months[d.getMonth()]} ${d.getFullYear()} y.`
 }
 
 // Renderlash
@@ -56,7 +56,7 @@ const render = (list) => {
 
 const getWorkers = async () => {
     let res = await axios.get(`${url}/${table}`)
-    if(res.status == 200){
+    if (res.status == 200) {
         workers = res.data
         console.log(workers)
     }
@@ -65,29 +65,38 @@ const getWorkers = async () => {
 
 // Qo'shish
 const addWorkers = () => {
-    inputs.forEach(async (el) => {
-      worker[el.getAttribute('name')] = el.value;
-      try {
-        let res = await axios.post(`${url}/${table}`, worker);
-        if (res.status === 201) {
-          workers = [res.data, ...workers];
-          render(workers);
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    });
-  };
-  
-
-  // O'chirish
-const deleteWorker = _id => {
-    if (confirm('Ishonchingiz komilmi?')){
-        axios.delete(`${url}/${table}/${_id}`)
-    .then(() => {
-        workers = workers.filter(wInfo => wInfo._id !== _id)
-        render(workers)
+    inputs.forEach((el) => {
+        worker[el.getAttribute('name')] = el.value;
     })
+
+    console.log("WORKER:", worker)
+    const res = fetch(`${url}/${table}`, {
+        method: "post",
+        headers: {
+            'Content-Type': "application/json"
+        },
+        body: JSON.stringify(worker)
+    }).then(res => res.json()).then(response => {
+
+        console.log("Response", response.data)
+        if (res.status === 201) {
+            workers = [res.data, ...workers];
+            // render(workers);
+        }
+    }).catch(e => {
+        console.log("Axios error", e)
+    })
+};
+
+
+// O'chirish
+const deleteWorker = _id => {
+    if (confirm('Ishonchingiz komilmi?')) {
+        axios.delete(`${url}/${table}/${_id}`)
+            .then(() => {
+                workers = workers.filter(wInfo => wInfo._id !== _id)
+                render(workers)
+            })
 
     }
 }
