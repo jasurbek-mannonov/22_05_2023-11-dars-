@@ -23,14 +23,9 @@
                     <th>Ismi</th>
                     <th>Familiyasi</th>
                     <th>Email</th>
-                    <th>Manzil</th>
-                    <th>Yosh</th>
-                    <th>Ro'yxatga olingan vaqti</th>
-                    <!-- <th>Yangilangan vaqti</th> -->
                     <th>Telefon</th>
                     <th>Bo'lim</th>
                     <th>Holati</th>
-                    <th>Maoshi</th>
                     <th></th>
                 </tr>
             </thead>
@@ -73,6 +68,7 @@
                         <input type="number" class="form-control" id="phone" name="phone">
                     </div>
                     <div class="mb-3">
+                        <label for="department-select" class="form-label">Xodimlar bo'limi</label>
                         <select class="form-select" id="department-select" name="department">
                         </select>
                     </div>
@@ -92,34 +88,19 @@
         </div>
     </div>   
 
-    <!-- Bo'limni tahrirlash -->
-    <!-- <div class="modal fade" id="editDep" tabindex="-1">
+    <!-- Xodimning batafsil ma'lumotlarini ko'rsatish -->
+    <div class="modal fade" id="showWorker" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5">Xodimni tahrirlash</h1>
+                    <h1 class="modal-title fs-5">Xodim sahifasi</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="title" class="form-label">Xodimning ismi</label>
-                        <input type="text" class="form-control" id="uptitle" onkeypress="handlePress(event,1)">
-                    </div>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="upstatus" value="1">
-                        <label class="form-check-label" for="upstatus">Faol</label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        Bekor qilish</button>
-
-                    <button type="button" class="btn btn-primary" onclick="saveDepart()" data-bs-dismiss="modal">
-                        Saqlash</button>
-                </div>
+                 
             </div>
         </div>
-    </div> -->
+    </div>   
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
