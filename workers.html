@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div class="container-workers m-3">
+    <div class="container container-workers m-auto">
         <div class="d-flex justify-content-between mt-3 mb-3">
             <h2>Xodimlar ro'yxati</h2>
             <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addDep">Yangi xodim</button>
@@ -100,7 +100,66 @@
                  
             </div>
         </div>
-    </div>   
+    </div>  
+    </div> 
+
+    <!-- Tahrirlash -->
+    <div class="modal fade" id="editWorker" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Xodim ma'lumotlarini tahrirlash</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Ismi</label>
+                        <input type="text" class="form-control" id="upname" name="name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="lname" class="form-label">Familiya</label>
+                        <input type="text" class="form-control" id="uplname" name="lname">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="text" class="form-control" id="upemail" name="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Manzil</label>
+                        <input type="text" class="form-control" id="address" name="address">
+                    </div>
+                    <div class="mb-3">
+                        <label for="age" class="form-label">Yosh</label>
+                        <input type="number" class="form-control" id="age" name="age">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Telefon</label>
+                        <input type="number" class="form-control" id="phone" name="phone">
+                    </div>
+                    <div class="mb-3">
+                        <label for="department-select" class="form-label">Xodimlar bo'limi</label>
+                        <select class="form-select" id="department-select" name="department">
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="salary" class="form-label">Maoshi</label>
+                        <input type="number" class="form-control" id="salary" name="salary">
+                    </div> 
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="upstatus" value="1">
+                        <label class="form-check-label" for="upstatus">Faol</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Bekor qilish</button>
+
+                    <button type="button" class="btn btn-primary" onclick="saveWorker()" data-bs-dismiss="modal">
+                        Saqlash</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>

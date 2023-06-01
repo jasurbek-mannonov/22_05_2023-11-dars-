@@ -99,6 +99,7 @@ const saveDepart = async () => {
     }
 }
 
+// Tahrirlash
 const editDep = async (_id) => {
     editModal.show(editModalToggle)
     let res = await axios.get(`${url}/${dep}/get/${_id}`)

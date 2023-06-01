@@ -2,8 +2,13 @@ const url = 'http://95.130.227.52:3010'
 const table = 'worker'
 
 let addDep = document.querySelector('#addDep')
+// Qo'shish uchun olingan inputlar
 let inputs = document.querySelectorAll('#addDep [name]')
+// Tahrirlash uchun olingan inputlar
+let inputsEditWorker = document.querySelectorAll('#editWorker [name]')
 let tableWorkers = document.querySelector('.table tbody')
+
+let upstatus = document.getElementById('upstatus')
 
 //Xodimning qaysi bo'limga mansubligini Modal ichidagi sectiondan tanlay olishi kerak 
 let workerDepartment = document.getElementById("department-select");
@@ -12,11 +17,17 @@ let optionTitles = []; // Array to store option titles
 let workers = []
 let worker = {}
 
+// Batafsil ma'lumotlarni ko'rsatish
 const showModal = new bootstrap.Modal('#showWorker', {
     keyboard: false
 })
 const showModalToggle = document.getElementById('showWorker')
 
+// Tahrirlash uchun 
+const editModal = new bootstrap.Modal('#editWorker', {
+    keyboard: false
+})
+const editModalToggle = document.getElementById('editWorker')
 
 const months = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'Avgust', 'Sentyabr', 'Oktyabr', 'Noyabr', 'Dekabr']
 
@@ -95,7 +106,6 @@ const getWorkers = async () => {
     let res = await axios.get(`${url}/${table}`)
     if (res.status == 200) {
         workers = res.data
-
     }
     render(workers)
 }
@@ -104,15 +114,47 @@ const getWorkers = async () => {
 const addWorkers = async () => {
     let worker = {}
     inputs.forEach(input => {
-        worker[input.getAttribute('name')] = input.value
+        worker[input.getAttribute('name')] = input.value;
+        input.value = ''
     })
-    console.log(worker)
     let res = await axios.post(`${url}/${table}`, worker)
     if (res.status == 201) {
         workers = [res.data, ...workers]
         render(workers)
     }
 }
+
+// Tahrirlash & Saqlash
+const saveWorker = async () => {
+    worker.status = upstatus.checked ? 1 : 0
+    inputsEditWorker.forEach(workerInput => {
+        
+    })
+    let res = await axios.put(`${url}/${table}`, {
+        ...worker
+    })
+    if (res.status == 200) {
+        editModal.hide(editModalToggle)
+        workers = workers.map(w => {
+            if (w._id === res.data._id) return res.data
+            return w
+        })
+        render(workers)
+    }
+}
+
+// Tahrirlash
+const editWorker = async (_id) => {
+    editModal.show(editModalToggle)
+    let res = await axios.get(`${url}/${table}/get/${_id}`)
+    if (res.status === 200) {
+        workerInput.value = res.data
+        upstatus.checked = res.data.status === 1
+        worker = {...res.data}
+    }
+}
+
+console.log()
 
 // O'chirish
 const deleteWorker = _id => {
@@ -128,7 +170,7 @@ const deleteWorker = _id => {
 
 const showWorker = async (id) => {
     let res = await axios.get(`${url}/${table}/get/${id}`)
-    if(res.status == 200){
+    if (res.status == 200) {
         let s = res.data
         let str = `
         <h3 class="text-center">${s.lname} ${s.name}</h3>
